@@ -23,10 +23,10 @@ func UploadSliceFile(fileName string, fileType string, fileContext io.ReadCloser
 		return err
 	}
 	// slice request body and write them into different part
-	buf := make([]byte, 4194304)
 	count := 0
 	for {
-		n, err := fileContext.Read(buf)
+		buf := make([]byte, 4194304)
+		n, err := fileContext.Read(buf[:])
 		if n < 0 {
 			log.Println("Read Slice Err")
 			return err
@@ -39,11 +39,12 @@ func UploadSliceFile(fileName string, fileType string, fileContext io.ReadCloser
 				log.Default().Printf("Open file %v failed", sliceFileName)
 				return err
 			}
-			_, err = file.Write(buf)
+			_, err = file.Write(buf[0:n])
 			if err != nil {
 				log.Default().Printf("Write file %v failed", file.Name())
 			}
 			file.Close()
+			count+=1
 		}
 	}
 	return nil
