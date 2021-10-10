@@ -10,18 +10,17 @@ import (
 
 func main() {
 	router := gin.Default()
-	router.POST("/api/file/:filename/:filetype", func(c *gin.Context) {
+	router.POST("/api/file/:filename/", func(c *gin.Context) {
 
 	})
-	router.POST("/api/file/slice/:filename/:filetype", func(c *gin.Context) {
+	router.POST("/api/file/slice/:filename", func(c *gin.Context) {
 		// Get filename
 		fileName := c.Param("filename")
-		fileType := c.Param("filetype")
 		// 获取body内容
 		fileContext := c.Request.Body
 		defer fileContext.Close()
 		// 处理上传
-		err := adapter.UploadSliceFile(fileName, fileType, fileContext)
+		err := adapter.UploadSliceFile(fileName, fileContext)
 		if err != nil {
 			return
 		}

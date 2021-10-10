@@ -11,7 +11,7 @@ import (
 	"github.com/SandyZ17/gin-sync-upload/common"
 )
 
-func UploadSliceFile(fileName string, fileType string, fileContext io.ReadCloser) error {
+func UploadSliceFile(fileName string, fileContext io.ReadCloser) error {
 	filePath := "upload/" + fileName + "/"
 	// h := md5.New()
 	h := md5.Sum([]byte(fileName))
@@ -44,7 +44,7 @@ func UploadSliceFile(fileName string, fileType string, fileContext io.ReadCloser
 				log.Default().Printf("Write file %v failed", file.Name())
 			}
 			file.Close()
-			count+=1
+			count += 1
 		}
 	}
 	return nil
