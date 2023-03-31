@@ -33,6 +33,7 @@ func UploadSliceFile(fileName string, fileContext io.ReadCloser) error {
 		} else if n == 0 {
 			break
 		} else if n > 0 {
+			fmt.Println("asdqwd123rd23f3f")
 			sliceFileName := filePath + fileHash + "-" + strconv.Itoa(count)
 			file, err := os.OpenFile(sliceFileName, os.O_CREATE|os.O_RDWR, os.ModePerm)
 			if err != nil {
